@@ -12,9 +12,7 @@ jobs:
           echo "woah i am the entry job, i don't do anything interesting so i need no environment!"
 
   parallel_job_1:
-    environment: example-environment
     uses: ./.github/workflows/simple-example.yaml
 
   parallel_job_2:
-    environment: example-environment
     uses: ./.github/workflows/simple-example.yaml
