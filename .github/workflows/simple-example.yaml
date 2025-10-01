@@ -3,9 +3,14 @@ name: Example WIF
 on:
   workflow_dispatch:
   workflow_call:
+    environment:
+      required: false
+      type: string
+      name: Environment to deploy to
 
 jobs:
   authenticate:
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     permissions:
       contents: "read"

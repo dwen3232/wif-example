@@ -15,10 +15,14 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write" # Required for WIF authentication
+    needs: entry_job
     uses: ./.github/workflows/simple-example.yaml
 
   parallel_job_2:
     permissions:
       contents: "read"
       id-token: "write" # Required for WIF authentication
+    needs: entry_job
     uses: ./.github/workflows/simple-example.yaml
+    with:
+      environment: example-environment
