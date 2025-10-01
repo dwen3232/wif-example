@@ -1,10 +1,6 @@
-locals {
-  project_id = "development-448601"
-  region     = "us-central1"
-}
 provider "google" {
-  project = local.project_id
-  region  = local.region
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_iam_workload_identity_pool" "example-wif-pool" {
@@ -39,7 +35,7 @@ resource "google_iam_workload_identity_pool_provider" "example-provider" {
 
 # Create a service account to be impersonated by the GitHub Actions
 resource "google_service_account" "github_sa" {
-  project      = local.project_id
+  project      = var.project_id
   account_id   = "sa-wif-example"
   display_name = "Service Account for GitHub Actions"
 }
@@ -53,5 +49,3 @@ resource "google_service_account_iam_binding" "github_sa_binding" {
     "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.example-wif-pool.name}/attribute.repository/dwen3232/wif-example"
   ]
 }
-
-
