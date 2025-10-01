@@ -7,7 +7,7 @@ on:
       environment:
         required: false
         type: string
-        name: Environment to deploy to
+        description: Environment to deploy to
 
 jobs:
   authenticate:
