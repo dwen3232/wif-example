@@ -11,14 +11,14 @@ jobs:
       id-token: "write" # Required for WIF authentication
 
     steps:
-      - uses: 'actions/checkout@v4'
+      - uses: "actions/checkout@v4"
       - name: Authenticate with Workload Identity Federation
         id: auth
         uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: "${{ vars.WIF_PROVIDER }}"
           service_account: "${{ vars.WIF_SERVICE_ACCOUNT }}"
-
+      - uses: google-github-actions/setup-gcloud@v1
       - name: Verify authentication success
         run: |
           echo "✅ WIF Authentication succeeded!"
