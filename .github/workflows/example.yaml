@@ -21,6 +21,6 @@ jobs:
       - name: Verify authentication success
         run: |
           echo "✅ WIF Authentication succeeded!"
-          echo "Authenticated as service account: ${{ secrets.WIF_SERVICE_ACCOUNT }}"
-          # Verify by listing auth accounts
-          gcloud auth list
+
+          echo "Authenticated identity:"
+          gcloud config get-value account

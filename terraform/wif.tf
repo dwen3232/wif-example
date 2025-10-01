@@ -7,17 +7,15 @@ provider "google" {
   region  = local.region
 }
 
-# Create a Workload Identity Pool
-resource "google_iam_workload_identity_pool" "github_pool" {
-  workload_identity_pool_id = "github-pool"
+resource "google_iam_workload_identity_pool" "example-wif-pool" {
+  workload_identity_pool_id = "example-wif-pool"
   display_name              = "GitHub Actions Pool"
   description               = "Identity pool for GitHub Actions workflows"
 }
 
-# Create a Workload Identity Provider for GitHub
-resource "google_iam_workload_identity_pool_provider" "github_provider" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.github_pool.workload_identity_pool_id
-  workload_identity_pool_provider_id = "github-provider"
+resource "google_iam_workload_identity_pool_provider" "example-provider" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.example-wif-pool.workload_identity_pool_id
+  workload_identity_pool_provider_id = "example-provider"
   display_name                       = "GitHub Actions Provider"
 
   attribute_mapping = {
@@ -47,7 +45,7 @@ resource "google_service_account_iam_binding" "github_sa_binding" {
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/dwen3232/infra-example"
+    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.example-wif-pool.name}/attribute.repository/dwen3232/infra-example"
   ]
 }
 
