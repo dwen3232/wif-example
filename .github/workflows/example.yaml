@@ -11,6 +11,7 @@ jobs:
       id-token: "write" # Required for WIF authentication
 
     steps:
+      - uses: 'actions/checkout@v4'
       - name: Authenticate with Workload Identity Federation
         id: auth
         uses: google-github-actions/auth@v3
