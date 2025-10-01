@@ -23,9 +23,14 @@ resource "google_iam_workload_identity_pool_provider" "example-provider" {
     "attribute.actor"      = "assertion.actor"
     "attribute.repository" = "assertion.repository"
     "attribute.ref"        = "assertion.ref"
+    "attribute.workflow"   = "assertion.workflow"
   }
 
-  attribute_condition = "attribute.repository == 'dwen3232/wif-example'"
+  attribute_condition = <<-EOT
+    assertion.repository == 'dwen3232/wif-example' && 
+    assertion.ref == 'refs/heads/main' && 
+    assertion.workflow == 'Example WIF'
+  EOT
 
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
@@ -45,7 +50,7 @@ resource "google_service_account_iam_binding" "github_sa_binding" {
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.example-wif-pool.name}/attribute.repository/dwen3232/infra-example"
+    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.example-wif-pool.name}/attribute.repository/dwen3232/wif-example"
   ]
 }
 
