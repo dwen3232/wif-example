@@ -25,7 +25,7 @@ resource "google_iam_workload_identity_pool_provider" "example-provider" {
     "attribute.ref"        = "assertion.ref"
   }
 
-  attribute_condition = "attribute.repository == 'dwen3232/infra-example'"
+  attribute_condition = "attribute.repository == 'dwen3232/wif-example'"
 
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
@@ -35,7 +35,7 @@ resource "google_iam_workload_identity_pool_provider" "example-provider" {
 # Create a service account to be impersonated by the GitHub Actions
 resource "google_service_account" "github_sa" {
   project      = local.project_id
-  account_id   = "github-actions-sa"
+  account_id   = "sa-wif-example"
   display_name = "Service Account for GitHub Actions"
 }
 
