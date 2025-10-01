@@ -1,0 +1,26 @@
+name: Example WIF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  authenticate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write" # Required for WIF authentication
+
+    steps:
+      - name: Authenticate with Workload Identity Federation
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: "${{ vars.WIF_PROVIDER }}"
+          service_account: "${{ vars.WIF_SERVICE_ACCOUNT }}"
+
+      - name: Verify authentication success
+        run: |
+          echo "✅ WIF Authentication succeeded!"
+          echo "Authenticated as service account: ${{ secrets.WIF_SERVICE_ACCOUNT }}"
+          # Verify by listing auth accounts
+          gcloud auth list
