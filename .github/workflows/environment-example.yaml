@@ -11,3 +11,8 @@ jobs:
         run: |
           echo "woah i am the entry job, i don't do anything interesting so i need no environment!"
 
+  parallel_job_1:
+    uses: ./.github/workflows/simple-example.yaml
+
+  parallel_job_2:
+    uses: ./.github/workflows/simple-example.yaml
