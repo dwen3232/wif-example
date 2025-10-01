@@ -25,7 +25,7 @@ resource "google_iam_workload_identity_pool_provider" "example-provider" {
   attribute_condition = <<-EOT
     assertion.repository == 'dwen3232/wif-example' && 
     assertion.ref == 'refs/heads/main' && 
-    assertion.workflow == 'Example WIF'
+    (assertion.workflow == 'Example WIF' || assertion.workflow == 'Environment Example')
   EOT
 
   oidc {
