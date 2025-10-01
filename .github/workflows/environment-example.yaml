@@ -17,6 +17,8 @@ jobs:
       id-token: "write" # Required for WIF authentication
     needs: entry_job
     uses: ./.github/workflows/simple-example.yaml
+    with:
+      environment: example-environment
 
   parallel_job_2:
     permissions:
