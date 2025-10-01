@@ -3,10 +3,11 @@ name: Example WIF
 on:
   workflow_dispatch:
   workflow_call:
-    environment:
-      required: false
-      type: string
-      name: Environment to deploy to
+    inputs:
+      environment:
+        required: false
+        type: string
+        name: Environment to deploy to
 
 jobs:
   authenticate:
