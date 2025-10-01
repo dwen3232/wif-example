@@ -13,8 +13,8 @@ jobs:
 
   parallel_job_1:
     environment: example-environment
-    uses: ./.github/workflow/simple-example.yaml
-    
+    uses: ./.github/workflows/simple-example.yaml
+
   parallel_job_2:
     environment: example-environment
-    uses: ./.github/workflow/simple-example.yaml
+    uses: ./.github/workflows/simple-example.yaml
